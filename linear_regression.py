@@ -67,7 +67,7 @@ plt.xlabel("Iterations")
 plt.ylabel("COST J(w,b)")
 plt.title("Gradient Descent Convergence")
 plt.tight_layout()
-plt.savefig("result.jpg")
+plt.savefig("result.png")
 plt.show()
 
 print("len of dataset: ",m)
