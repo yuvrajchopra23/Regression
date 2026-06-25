@@ -131,4 +131,5 @@ plt.ylabel("Sales ($)")
 plt.title("MSRP vs Sales")
 
 plt.tight_layout()
+plt.savefig("polynomial_regression_res.png")
 plt.show()
