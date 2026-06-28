@@ -1,0 +1,1 @@
+plt.savefig("multiple_regression_res.png")

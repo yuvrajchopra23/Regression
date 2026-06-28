@@ -101,5 +101,5 @@ plt.xlabel("Actual Sales")
 plt.ylabel("Predicted Sales")
 plt.title("predicted vs actual sales")
 plt.tight_layout()
-plt.savefig("multiple_regression_res.png")
+
 plt.show()
