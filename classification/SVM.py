@@ -88,6 +88,39 @@ plt.ylabel("Accuracy")
 plt.title("Accuracy vs C (margin Strictness)")
 plt.grid(alpha=0.3)
 
+# Classification graph using QUANTITYORDERED vs PRICEEACH
+# Best parameters: kernel=rbf, C=100
+
+X_vis = x[:, :2]   # take first two features for visualization
+y_vis = y
+
+# scale
+scaler_vis = StandardScaler()
+X_vis_scaled = scaler_vis.fit_transform(X_vis)
+
+# train SVM with best parameters
+model_vis = SVC(kernel="rbf", C=100)
+model_vis.fit(X_vis_scaled, y_vis)
+
+# create mesh grid
+x_min, x_max = X_vis_scaled[:, 0].min() - 1, X_vis_scaled[:, 0].max() + 1
+y_min, y_max = X_vis_scaled[:, 1].min() - 1, X_vis_scaled[:, 1].max() + 1
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 300),
+                     np.linspace(y_min, y_max, 300))
+
+# predict over grid
+Z = model_vis.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+
+# plot decision boundary
+plt.figure(figsize=(7,6))
+plt.contourf(xx, yy, Z, alpha=0.3, cmap=plt.cm.coolwarm)
+plt.scatter(X_vis_scaled[:, 0], X_vis_scaled[:, 1], c=y_vis,
+            edgecolors="k", cmap=plt.cm.coolwarm, alpha=0.8)
+plt.xlabel("QUANTITYORDERED (scaled)")
+plt.ylabel("PRICEEACH (scaled)")
+plt.title("SVM Classification Boundary (RBF Kernel, C=100)")
+
 plt.tight_layout()
-plt.savefig("svm_results.png", dpi=150)
+plt.savefig("svm_results1.png", dpi=150)
 plt.show()
